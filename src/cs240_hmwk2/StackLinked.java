@@ -9,7 +9,8 @@ package cs240_hmwk2;
  */
 public class StackLinked<T> implements StackInterface<T> {
 
-	protected Node<T> head = new Node<T>(null);	//first node
+	protected Node<T> head = new Node<T>(null, null);	//first node
+	protected Node<T> tail = new Node<T>(head);	//last node
 	protected int numOfNodes = 0;	//number of nodes
 	
 	/**
@@ -18,14 +19,8 @@ public class StackLinked<T> implements StackInterface<T> {
 	 */
 	@Override
 	public void push(T newEntry) {
-		Node<T> nd = new Node<T>(newEntry);
-		
-		numOfNodes++;
-		
-		for (int i = 0; i < numOfNodes; i++)
-		{
-			nd.setAddress(address);
-		}
+		Node<T> nd = new Node<T>(tail.getAddress(), newEntry);	//set address of new node to the node before tail
+		tail.setAddress(nd.getAddress());	//set tail address to new node's address
 	}
 
 	/**
@@ -56,8 +51,11 @@ public class StackLinked<T> implements StackInterface<T> {
 	 */
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		if( tail.getAddress() == head)	//if tail address is set to head then no nodes in list so empty.
+		{
+			return true;
+		}
+		else return false;
 	}
 
 	/**
@@ -65,8 +63,7 @@ public class StackLinked<T> implements StackInterface<T> {
 	 */
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		tail.setAddress(head);	//set tail address to head and garbage collector will delete unlinked nodes.
 	}
 
 }

@@ -23,6 +23,12 @@ public class Node<T> {
 		address = null;
 		this.data = data;
 	}
+	
+	public Node (Node<T> address)
+	{
+		this.address = address;
+		this.data = null;
+	}
 
 	public Node<T> getAddress() {
 		return address;

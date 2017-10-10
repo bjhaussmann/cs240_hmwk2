@@ -11,7 +11,7 @@ import java.util.EmptyStackException;
  */
 public class StackFixedSize<T> implements StackInterface<T>{
 
-	private final static int defaultSize = 30;	//default fixed size
+	private final static int defaultSize = 10;	//default fixed size
 	private final T[] stack;
 	private int numOfEntries;	//entry counter
 	
