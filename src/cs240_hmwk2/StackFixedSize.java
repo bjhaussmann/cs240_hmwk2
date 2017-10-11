@@ -20,6 +20,10 @@ public class StackFixedSize<T> implements StackInterface<T>{
 		this(defaultSize);
 	}
 	
+	/**
+	 * Constructor for stack with passed fixed size.
+	 * @param size	Fixed size of the stack. Default is 10.
+	 */
 	public StackFixedSize(int size) {
 		@SuppressWarnings("unchecked")
 		T[] tempStack = (T[])new Object[size];	//unchecked cast
@@ -28,7 +32,7 @@ public class StackFixedSize<T> implements StackInterface<T>{
 	}
 	
 	/**	
-	 * Adds a new entry to the top of this stack.
+	 *  Adds a new entry to the top of this stack.
 	 *	@param	newEntry	An object to be added to the stack.
 	 */	
 	@Override

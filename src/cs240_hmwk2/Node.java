@@ -9,33 +9,21 @@ package cs240_hmwk2;
  */
 public class Node<T> {
 
-	private Node<T> address;
+	private Node<T> link;
 	private T data;
 	
 	public Node (Node<T> address, T data)
 	{
-		this.address = address;
+		this.link = address;
 		this.data = data;
 	}
-	
-	public Node (T data)
-	{
-		address = null;
-		this.data = data;
-	}
-	
-	public Node (Node<T> address)
-	{
-		this.address = address;
-		this.data = null;
+
+	public Node<T> getLink() {
+		return link;
 	}
 
-	public Node<T> getAddress() {
-		return address;
-	}
-
-	public void setAddress(Node<T> address) {
-		this.address = address;
+	public void setLink(Node<T> address) {
+		this.link = address;
 	}
 
 	public T getData() {
