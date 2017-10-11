@@ -3,17 +3,15 @@
  */
 package cs240_hmwk2;
 
-import java.util.EmptyQueueException;
-
 /**
  * @author bjhau
  *
  */
 public class QueueFixedSize<T> implements QueueInterface<T> {
 
-	private int front, back;
-	private static int defaultSize = 10;
-	private T queue[];
+	protected int front, back;
+	protected static int defaultSize = 10;
+	protected T queue[];
 	
 	public QueueFixedSize()
 	{
