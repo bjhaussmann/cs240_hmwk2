@@ -34,11 +34,19 @@ public class StackFixedSize<T> implements StackInterface<T>{
 	/**	
 	 *  Adds a new entry to the top of this stack.
 	 *	@param	newEntry	An object to be added to the stack.
+	 *	@throws	ArrayIndexOutOfBoundsException	Not enough room in the stack for the new entry.
 	 */	
 	@Override
 	public void push(T newEntry) {
-		stack[numOfEntries] = newEntry;	//add new data to stack
-		numOfEntries++;	//increment entry counter
+		if (numOfEntries < stack.length)
+		{
+			stack[numOfEntries] = newEntry;	//add new data to stack
+			numOfEntries++;	//increment entry counter
+		}
+		else
+		{
+			throw new ArrayIndexOutOfBoundsException();
+		}
 	}
 
 	/**
