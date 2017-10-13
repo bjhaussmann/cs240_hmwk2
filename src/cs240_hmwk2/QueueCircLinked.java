@@ -9,7 +9,7 @@ package cs240_hmwk2;
  */
 public class QueueCircLinked<T> implements QueueInterface<T> {
 	
-	private int maxSize = 10;
+	private static int maxSize = 10;
 	private int size;
 	
 	private Node<T> back = null;
@@ -17,14 +17,21 @@ public class QueueCircLinked<T> implements QueueInterface<T> {
 	
 	public QueueCircLinked()
 	{
+		this(maxSize);
+	}
+	
+	public QueueCircLinked(int size)
+	{
 		back.setLink(free);
 		free.setLink(back);
 		back.setData(null);
 		free.setData(null);
+		maxSize = size;
 	}
 	
 	/** Adds a new entry to the back of this queue.
-	   @param newEntry  An object to be added. */
+	   @param newEntry  An object to be added. 
+	   @throws	FullQueueException	if queue is full*/
 	@Override
 	public void enqueue(T newEntry) {
 		Node<T> current = back;
@@ -38,11 +45,11 @@ public class QueueCircLinked<T> implements QueueInterface<T> {
 				current = current.getLink();
 				count++;
 			}
-			if (count == max || (count < 10 && current.getData() == null))
+			if (count == maxSize || (count < 10 && current.getData() == null))
 			{
 				current.setData(newEntry);
 			}
-			if (count < 10 && current.getData() != null)
+			if (count < maxSize && current.getData() != null)
 			{
 				Node<T> newNode = new Node<T> (back, newEntry);
 				current.setLink(newNode);
@@ -60,8 +67,20 @@ public class QueueCircLinked<T> implements QueueInterface<T> {
 	   @throws  EmptyQueueException if the queue is empty before the operation. */
 	@Override
 	public T dequeue() {
-		// TODO Auto-generated method stub
-		return null;
+		Node<T> current = free;
+		
+		if(isEmpty())
+		{
+			throw new EmptyQueueException();
+		}
+		else
+		{
+			while (current.getLink() != free)
+			{
+				current = current.getLink();
+			}
+		}
+		return current.getData();
 	}
 
 	/**  Retrieves the entry at the front of this queue.
@@ -71,11 +90,18 @@ public class QueueCircLinked<T> implements QueueInterface<T> {
 	public T getFront() {
 		Node<T> current = free;
 		
-		while (current.getLink() != free)
+		if (isEmpty())
 		{
-			current = current.getLink();
+			throw new EmptyQueueException();
 		}
-		return current.getData();
+		else
+		{
+			while (current.getLink() != free)
+			{
+				current = current.getLink();
+			}
+			return current.getData();
+		}
 	}
 
 	/** Detects whether this queue is empty.
